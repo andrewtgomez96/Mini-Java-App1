@@ -3,9 +3,12 @@ package com.example.angomez.mini_app1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.text.TextWatcher;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,18 +70,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateCalculation(EditText tvNS, EditText tvFS){
-        Integer networkSpeed = Integer.getInteger(tvNS.getText().toString());
-        Integer fileSize = Integer.getInteger(tvFS.getText().toString());
+        /*Log.d("MYrando", tvNS.getText().toString());
+        Log.d("MYrando", tvFS.getText().toString());
+        Integer networkSpeed = 0;//Integer.getInteger(tvNS.getText().toString());
+        Integer fileSize = 0;//Integer.getInteger(tvFS.getText().toString());
         TextView printTime = (TextView) findViewById(R.id.textView3);
 
-        double perByteSpeed = (double)(networkSpeed * Math.pow(10, 6))/ 8;
+        double perByteSpeed = (double) (networkSpeed * Math.pow(10, 6)) / 8;
         double sizeInBytes = fileSize * Math.pow(2, 20);
 
-       double downloadTime = sizeInBytes / perByteSpeed;
+        double downloadTime = sizeInBytes / perByteSpeed;
 
-       System.out.println(downloadTime);
+        Log.d("hello", "why does nothing wqork");
+        System.out.println(downloadTime);
+*/
+        if(tvNS.getText().length() > 0 && tvFS.getText().length() > 0){
+            DecimalFormat value = new DecimalFormat("#.#");
+            Integer networkSpeed = Integer.parseInt(tvNS.getText().toString());
+            Integer fileSize = Integer.parseInt(tvFS.getText().toString());
+            TextView printTime = (TextView) findViewById(R.id.textView3);
 
-       printTime.setText(Double.toString(downloadTime));
+            double perByteSpeed = (double) (networkSpeed * Math.pow(10, 6)) / 8;
+            double sizeInBytes = fileSize * Math.pow(2, 20);
+
+            double downloadTime = sizeInBytes / perByteSpeed;
+            downloadTime = Math.round(downloadTime * 10) / 10.0;
+
+            printTime.setText(Double.toString(downloadTime));
+            Log.d("THE ANSWER", Double.toString(downloadTime));
+        }
     }
 
 
